@@ -6,17 +6,27 @@ void solve(){
     cin>>n;
     string s;
     cin>>s;
-    vector<int> A;
-    vector<int> B;
+    if(s[0]==s[n-1]){
+        cout<<(s[0]=='A'?"Alice":"Bob")<<endl;
+        return;
+    }
+    vector<int> A,B;
     for(int i=0;i<n;i++){
-        if(s[i]=='A') A.push_back(i+1);
-        else B.push_back(i+1);
+        if(s[i]=='A') A.push_back(i);
+        else B.push_back(i);
     }
-    if(B.back()>A.back()&&B.size()!=1) cout<<"Bob"<<endl;
-    else if(A.back()==n&&A[0]==1) cout<<"Alice"<<endl;
-    else{
-        cout<<"Bob"<<endl;
+    if(A[0]==0&&B.back()==n-1){
+        if(B.size()!=1) cout<<"Bob"<<endl;
+        else cout<<"Alice"<<endl;
+        return;
     }
+    if(n==2) cout<<"Bob"<<endl;
+    else if(s[n-2]=='A'){
+        cout<<"Alice"<<endl;
+
+    }
+    else cout<<"Bob"<<endl;
+
     
 }
 signed main(){
