@@ -92,23 +92,43 @@ void solve(){
 
     //     }
     // }
-    for(int i=2;i<n;i++){
-        int sum1=-arr[i];
-        int sum2=arr[i]-arr.back();
-        int sum=min(sum1,sum2);
-        int l=0,r=i-1;
-        while(l<=r){
-            if(arr[l]+arr[r]+sum>0){
-                ans+=r-l; //Pairs between r and l
-                          // i.e if 1 2 3 4 5, sum=6, 1+5 is satisfyin, then 2,5 3,5 4,5 must satisfy as well
-                r--;
-            }
-            else{
-                l++;
-            }
-        }
 
+    /////////////////////////////////////////////////////////////////////
+                    //TS ANSWER
+    // for(int i=2;i<n;i++){
+    //     int sum1=-arr[i];
+    //     int sum2=arr[i]-arr.back();
+    //     int sum=min(sum1,sum2);
+    //     int l=0,r=i-1;
+    //     while(l<=r){
+    //         if(arr[l]+arr[r]+sum>0){
+    //             ans+=r-l; //Pairs between r and l
+    //                       // i.e if 1 2 3 4 5, sum=6, 1+5 is satisfyin, then 2,5 3,5 4,5 must satisfy as well
+    //             r--;
+    //         }
+    //         else{
+    //             l++;
+    //         }
+    //     }
+
+    // }
+
+
+
+    // USING UPPER_BOUND AND LOWER_BOUND
+
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            int index1=-1; //FINDING THE LEAST K FOR WHICH arr[k]>=arr[i]+arr[j]
+            index1=lower_bound(arr.begin()+j+1,arr.end(),arr[i]+arr[j])-arr.begin();
+            int index2=-1;
+            index2=upper_bound(arr.begin()+j+1, arr.begin()+index1, arr.back()-arr[i]-arr[j])-arr.begin();
+            if(index1>index2&&index2!=j) ans+=(index1-index2);
+
+        }
     }
+
+
     cout<<ans<<endl;
 }
 signed main(){
