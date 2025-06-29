@@ -43,10 +43,8 @@ TreeNode* fillbt(int n){
     return root;
 }
 
-void fillgraph(vector<vector<int>> &adj){
-    int n=adj.size();
-    n--;
-    for(int i=1;i<n-1;i++){
+void fillgraph(vector<vector<int>> &adj, int edges){
+    for(int i=1;i<=edges;i++){
         int a,b;
         cin>>a>>b;
         adj[a].push_back(b);
@@ -55,13 +53,20 @@ void fillgraph(vector<vector<int>> &adj){
 
 }
 
-void fillunigraph(vector<vector<int>> &adj){
-    int n=adj.size();
-    n--;
-    for(int i=1;i<n;i++){
+void fillunigraph(vector<vector<int>> &adj, int edges){
+    for(int i=1;i<=edges;i++){
         int a,b;
         cin>>a>>b;
         adj[a].push_back(b);
+    }
+}
+
+void filltree(vector<vector<int>> &adj){
+    int n=adj.size()-1;
+    for(int i=2;i<=n;i++){
+        int a;
+        cin>>a;
+        adj[a].push_back(i);
     }
 }
 
