@@ -34,7 +34,16 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    fillarr(arr);
+    if(arr[1]>arr[0]){
+        cout<<2*arr[0]<<endl;
+        return;
+    }
+    cout<<arr[1]+arr[0]<<endl;
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

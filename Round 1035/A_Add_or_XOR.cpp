@@ -34,7 +34,31 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int a, b, x, y;
+    cin>>a>>b>>x>>y;
+    if(a>b){
+        if(a==b+1&&a&1){
+            cout<<y<<endl;
+        }
+        else{
+            cout<<-1<<endl;
+        }
+        return;
+    }
+    if(x<=y){
+        cout<<(x*(b-a))<<endl;
+        return;
+    }
+    int ans=0;
+    for(int i=a;i<b;i++){
+        if(i&1){
+            ans+=x;
+        }
+        else{
+            ans+=y;
+        }
+    }
+    cout<<ans<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);

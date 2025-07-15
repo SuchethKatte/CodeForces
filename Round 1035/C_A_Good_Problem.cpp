@@ -34,7 +34,24 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, l, r, k;
+    cin>>n>>l>>r>>k;
+    if(n&1||l==0){
+        cout<<l<<endl;
+        return;
+    }
+    int dig=log2(l);
+    int nearest2=1ll<<dig+1;
+    if(nearest2>r||n==2){
+        cout<<-1<<endl;
+        return;
+    }
+    if(k<=n-2){
+        cout<<l<<endl;
+    }
+    else{
+        cout<<nearest2<<endl;
+    }
 }
 signed main(){
     ios_base::sync_with_stdio(0);

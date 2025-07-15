@@ -34,6 +34,21 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
+    int n; cin>>n;
+    vector<int> arr(n);
+    fillarr(arr);
+    int a=arr[0];
+    int b=a;
+    for(int i=1;i<n;i++){
+        a=max(a,arr[i]);
+        if(arr[i]<a){
+            yes();
+            cout<<2<<endl;
+            cout<<a<<" "<<arr[i]<<endl;
+            return;
+        }
+    }
+    no();
     
 }
 signed main(){

@@ -5,6 +5,7 @@ using namespace std;
 #define ull unsigned long long
 #define ld  long double
 #define gcd(a,b) __gcd(a,b)
+int lcm(int a, int b) {return a*b/gcd(a,b);}
 #define MOD 1000000007
 #define all(a) a.begin(), a.end()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
@@ -34,7 +35,19 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    fillarr(arr);
+    //make all the elements equal, by dividing them sone number individiaully. Later calculate lcm of all such numbers
+    int ans=1;
+    for(int i=0;i<n-1;i++){
+        int g=arr[i]/gcd(arr[i],arr[i+1]);  //multiplication factor
+        ans=lcm(g,ans);
+    }
+    cout<<ans<<endl;
     
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

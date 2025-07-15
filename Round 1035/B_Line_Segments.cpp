@@ -34,7 +34,26 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    int x1,y1,x2,y2;
+    cin>>x1>>y1>>x2>>y2;
+    vector<int> arr(n);
+    int sum=0, maxi=0;
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+        maxi=max(maxi,arr[i]);
+        sum+=arr[i];
+    }
+    int dx=x2-x1, dy=y2-y1;
+    int a=dx*dx+dy*dy;
+    int maxradius=sum;
+    int minradius=max(maxi-(sum-maxi),0ll);
+    if(minradius*minradius<=a&&a<=maxradius*maxradius){
+        yes();
+        return;
+    }
+    no();
 }
 signed main(){
     ios_base::sync_with_stdio(0);
