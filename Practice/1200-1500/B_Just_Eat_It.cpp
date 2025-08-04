@@ -38,7 +38,21 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    fillarr(arr);
+    int sum1=0, sum2=0;
+    for(int i=0;i<n;i++){
+        int index=n-i-1;
+        sum1+=arr[i];
+        sum2+=arr[index];
+        if(sum1<=0||sum2<=0){
+            no();
+            return;
+        }
+    }
+    yes();
 }
 signed main(){
     ios_base::sync_with_stdio(0);

@@ -38,7 +38,30 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, m;
+    cin>>n>>m;
+    vector<int> a(n-1), b(n);
+    fillarr(a);
+    fillarr(b);
+    a.push_back(1);
+    sort(all(a));
+    sort(all(b));
+    int ans=0;
+    int l1=0, l2=0;
+    while(l1<n&&l2<n){
+        if(a[l1]<b[l2]){
+            
+            l1++;
+            l2++;
+            continue;
+        }
+        while(a[l1]>=b[l2]&&l2<n){     //handle index out of bound
+            l2++;
+            ans++;
+        }
+    }
+    cout<<ans<<endl;
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

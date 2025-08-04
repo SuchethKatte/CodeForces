@@ -7,9 +7,7 @@ using namespace std;
 #define gcd(a,b) __gcd(a,b)
 #define MOD 1000000007
 #define all(a) a.begin(), a.end()
-#define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 ////////////////////////////////////////////////////////////////
@@ -38,7 +36,44 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
+    int n, s;
+    cin>>n>>s;
+    vector<int> arr(n);
+    int zero=0, one=0, two=0;
+    int sum=0;
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+        if(arr[i]==0) zero++;
+        else if(arr[i]==1) one++;
+        else two++;
+        sum+=arr[i];
+    }
+    if(sum>s){
+        for(auto it:arr){
+            cout<<it<<" ";
+            
+        }
+        cout<<endl;
+        return;
+    }
+    if(s==sum+1){
+        for(int i=0;i<zero;i++){
+            cout<<"0 ";
+        }   
+        for(int i=0;i<two;i++){
+            cout<<"2 ";
+        }
+        for(int i=0;i<one;i++){
+            cout<<"1 ";
+        }
+        
+        cout<<endl;
+        return;
+    }
+    cout<<-1<<endl;
+    return;
     
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

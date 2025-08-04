@@ -9,7 +9,6 @@ using namespace std;
 #define all(a) a.begin(), a.end()
 #define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 ////////////////////////////////////////////////////////////////
@@ -38,7 +37,56 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    fillarr(arr);
+    //GREEDY
+    //Preserve the bigger last number if the element is 
+    //greater/lesser than both a.back() and b.back()
+    vector<int> a,b;
+    a.push_back(INT_MAX);
+    b.push_back(INT_MAX);
+    for(int i=0;i<n;i++){
+        int x=a.back(),  y=b.back();
+        if(arr[i]<=x&&arr[i]<=y){
+            if(x<=y){
+                a.push_back(arr[i]);
+            }
+            else{
+                b.push_back(arr[i]);
+            }
+        }
+        else if(arr[i]<=x){
+            a.push_back(arr[i]);
+        }
+        else if(arr[i]<=y){
+            b.push_back(arr[i]);
+        }
+        else{
+            if(x<=y){
+                a.push_back(arr[i]);
+            }
+            else{
+                b.push_back(arr[i]);
+            }
+        }
+    }
+    int ans=0;
+    if(a.size()>=2)
+    {for(int i=0;i<a.size()-1;i++){
+        if(a[i]<a[i+1]){
+            ans++;
+        }
+    }}
+    if(b.size()>=2)
+    {for(int i=0;i<b.size()-1;i++){
+        if(b[i]<b[i+1]){
+            ans++;
+        }
+    }}
+    cout<<ans<<endl;
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

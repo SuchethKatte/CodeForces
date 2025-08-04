@@ -7,9 +7,7 @@ using namespace std;
 #define gcd(a,b) __gcd(a,b)
 #define MOD 1000000007
 #define all(a) a.begin(), a.end()
-#define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 ////////////////////////////////////////////////////////////////
@@ -38,7 +36,38 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    vector<int> p(n);
+    fillarr(p);
+    int ans=0;
+
+    //Consider pi=1. Number of inversions depends on how many values are tehre on left 
+    //(1 is the smallest element)
+    //we could also do pi=2*n-1, that time pi becomes the largest value 
+    //count how many are there on right
+    //choose whether to make pi 1 or 2n-1 depending on the mminimum value
+    //now generalize for any pi
+    //do bruteforce of how many value are greater than that element towards left
+    //now change ai=2n-ai
+    //count how many value are smaller than that element towards right
+    //add the minimum number of both to answer
+
+
+    for(int i=0;i<n;i++){
+        int left=0, right=0;
+        for(int j=0;j<i;j++){
+            if(p[i]<p[j]) left++;   
+        }
+        for(int j=i+1;j<n;j++){
+            if(p[i]<p[j]) right++;    //pi=2*n-pi it becomes. But with reference to initial value only we cehck
+        }
+        ans+=min(left,right);
+        // if(left>right){
+        //     p[i]=2*n-p[i];
+        // }
+    }
+    cout<<ans<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);

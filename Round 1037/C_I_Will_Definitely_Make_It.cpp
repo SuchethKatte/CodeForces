@@ -7,9 +7,7 @@ using namespace std;
 #define gcd(a,b) __gcd(a,b)
 #define MOD 1000000007
 #define all(a) a.begin(), a.end()
-#define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 ////////////////////////////////////////////////////////////////
@@ -38,7 +36,41 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, k;
+    cin>>n>>k;
+    k--;
+    vector<int> arr(n);
+    fillarr(arr);
+    int initial=arr[k];
+    sort(all(arr));
+    int level=1;
+    bool flag=false;
+    vector<int> ans;
+
+    for(int i=0;i<n;i++){
+        if(flag){
+            if(arr[i]!=ans.back()){
+                ans.push_back(arr[i]);
+            }
+        }
+        else{
+            if(arr[i]==initial){
+                flag=true;
+                ans.push_back(arr[i]);
+            }
+        }
+    }
+    for(int i=0;i<ans.size()-1;i++){
+        int cost=ans[i]-level+1;
+        if(ans[i+1]-ans[i]<=cost){
+            level+=(ans[i+1]-ans[i]);
+        }
+        else{
+            no();
+            return;
+        }
+    }
+    yes();
 }
 signed main(){
     ios_base::sync_with_stdio(0);

@@ -7,9 +7,7 @@ using namespace std;
 #define gcd(a,b) __gcd(a,b)
 #define MOD 1000000007
 #define all(a) a.begin(), a.end()
-#define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 ////////////////////////////////////////////////////////////////
@@ -38,7 +36,34 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, k; cin>>n>>k;
+    vector<int> arr(n);
+    fillarr(arr);
+    if(k>=3){
+        cout<<0<<endl;
+        return;
+    }
+    sort(all(arr)); 
+    if(k==1){
+        sort(all(arr));    
+        int ans=arr[0];
+        for(int i=0;i<n-1;i++){
+            ans=min(ans,abs(arr[i]-arr[i+1]));
+        }
+        cout<<ans<<endl;
+        return;
+    }
+    int ans=arr[0];
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            int val=abs(arr[i]-arr[j]);
+            int index1=*upper_bound(all(arr),val);
+            int index2=*lower_bound(all(arr),val);
+            ans=min({ans,val,abs(val-index1),abs(val-index2)});
+        }
+    }
+    cout<<ans<<endl;
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

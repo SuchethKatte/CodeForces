@@ -7,9 +7,7 @@ using namespace std;
 #define gcd(a,b) __gcd(a,b)
 #define MOD 1000000007
 #define all(a) a.begin(), a.end()
-#define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 ////////////////////////////////////////////////////////////////
@@ -38,7 +36,35 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, q;
+    cin>>n>>q;
+    vector<int> arr(n), ques(q);
+    fillarr(arr); fillarr(ques);
+    vector<int> prefixsum(n,0);
+    vector<int> prefixmax(n,0);
+    prefixsum[0]=arr[0];
+    prefixmax[0]=arr[0];
+    for(int i=1;i<n;i++){
+        prefixsum[i]=arr[i]+prefixsum[i-1];
+        prefixmax[i]=max(prefixmax[i-1],arr[i]);
+    }
+    for(int i=0;i<q;i++){
+        int l=0, r=n-1;
+        int val=ques[i];
+        while(l<=r){
+            int mid=(l+r)/2;
+            if(prefixmax[mid]<=val){
+                l=mid+1;
+            }
+            else{
+                r=mid-1;
+            }
+        }
+        if(r>=0) cout<<prefixsum[r]<<" ";
+        else cout<<0<<" ";
+    }
+    cout<<endl;
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

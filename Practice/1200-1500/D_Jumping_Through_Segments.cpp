@@ -37,8 +37,35 @@ template <class T, class V> void _print(map <T, V> v) {cout << "[ "; for (auto i
 template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size();k++){_print(v[k]);}}
 /////////////////////////////////////////////////////////////
 
+bool bs(vector<vector<int>> &arr, int k){
+    int l=0, r=0;
+    for(int i=0;i<arr.size();i++){
+        l=max(l-k,arr[i][0]);
+        r=min(r+k,arr[i][1]);
+        if(l>r) return false;
+
+    }
+    return true;
+}
+
+
+
 void solve(){
-    
+    int n;
+    cin>>n;
+    vector<vector<int>> arr(n,vector<int>(2));
+    fillarr(arr);
+    int l=-1, r=1e9;
+    while(l<=r){
+        int mid=(l+r)/2;
+        if(bs(arr,mid)){
+            r=mid-1;
+        }
+        else{
+            l=mid+1;
+        }
+    }
+    cout<<r+1<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);

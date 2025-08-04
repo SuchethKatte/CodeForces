@@ -5,11 +5,9 @@ using namespace std;
 #define ull unsigned long long
 #define ld  long double
 #define gcd(a,b) __gcd(a,b)
-#define MOD 1000000007
+#define MOD 998244353
 #define all(a) a.begin(), a.end()
-#define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 ////////////////////////////////////////////////////////////////
@@ -38,7 +36,44 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
+    string s;
+    cin>>s;
+    int n=s.size();
+    vector<int> arr;
+    char pivot=s[0];
+    for(int i=1;i<n;i++){
+        int count=1;
+        while(s[i]==pivot){
+            count++;
+            i++;
+        }
+        if(count!=1){
+            arr.push_back(count);
+        }
+        pivot='0'+!(pivot-'0');
+    }
+    int sum=0ll, product=1LL;
+    for(auto it:arr ){
+        // cout<<it<<" ";
+        sum+=(it-1LL);
+        product=(product*it)%MOD;
+    }
     
+    //now we have the elements which are removed, which is basically the product.
+    //to choose the order on how they get removed, we just need to find all the permutations
+    //of the elements getting deleted
+    // ex: 00011
+    //final:0 1, 3*2=6
+    //6 ways of getting the final answer by just removing them
+    //but also you could remove the first 0 first, then 2nd 0 like that
+    //so elements getting removed=sum
+    //6*sum! is the answer
+
+    for(int i=sum;i>=2;i--){
+        product=(product*i)%MOD;
+    }
+    cout<<sum<<" "<<product<<endl;
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

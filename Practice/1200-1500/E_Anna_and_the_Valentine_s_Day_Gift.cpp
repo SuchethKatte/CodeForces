@@ -8,10 +8,9 @@ using namespace std;
 #define MOD 1000000007
 #define all(a) a.begin(), a.end()
 #define rall(a) a.rbegin(), a.rend()
-void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
-void yes() { cout<<"YES\n"; }
-void no() { cout<<"NO\n"; }
+void fillarr(vector<string> &arr){ for(auto &it:arr) cin>>it;}
+void yes() { cout<<"Sasha\n"; }
+void no() { cout<<"Anna\n"; }
 ////////////////////////////////////////////////////////////////
 void _print(int t) {cout << t;}
 void _print(string t) {cout << t;}
@@ -38,7 +37,37 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, m;
+    cin>>n>>m;
+    vector<string> arr(n);
+    vector<vector<int>> a(n,vector<int>(2));
+    for(int i=0;i<n;i++){
+        cin>>arr[i];    
+        int index=arr[i].size()-1;
+        int j=index;
+        for(j=index;j>=0;j--){
+            if(arr[i][j]!='0') {break;}
+        }
+        a[i][0]=index-j;
+        a[i][1]=index+1;
+    }
+    sort(rall(a));
+    int ans=0;
+    // for(int i=0;i<n;i++){
+    //     cout<<a[i][0]<<" "<<a[i][1]<<endl;
+    // }
+    for(int i=0;i<n;i++){
+        if(i&1){
+            ans+=a[i][1];
+        }
+        else{
+            ans+=a[i][1]-a[i][0];
+        }   
+        // cout<<ans<<endl;
+    }
+    // cout<<ans<<endl;
+    (ans-1<m)?no():yes();
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

@@ -7,9 +7,7 @@ using namespace std;
 #define gcd(a,b) __gcd(a,b)
 #define MOD 1000000007
 #define all(a) a.begin(), a.end()
-#define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 ////////////////////////////////////////////////////////////////
@@ -38,7 +36,31 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, c;
+    cin>>n>>c;
+    vector<int> arr(n);
+    fillarr(arr);
+    sort(all(arr));
+    int index=-1;
+    for(int i=0;i<n;i++){
+        if(arr[i]<=c){
+            index=i;
+        }
+        else{
+            break;
+        }
+    }
+    if(index==-1){
+        cout<<n<<endl;
+        return;
+    }
+    int cost=0;
+    for(int i=index;i>=0;i--){
+        if(arr[i]*(1<<cost)<=c){
+            cost++;
+        }
+    }
+    cout<<n-cost<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);
