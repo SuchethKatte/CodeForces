@@ -9,7 +9,6 @@ using namespace std;
 #define all(a) a.begin(), a.end()
 #define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<int> &a, vector<int> &b){ for(auto &it:a) {cin>>it;} for(auto &it:b) {cin>>it;}}
 void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
@@ -39,7 +38,26 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n; cin>>n;
+    if(n&1){
+        double s=n/2;
+        int a=s+1;
+        cout<<a<<endl;
+        return;
+    }
+    int a=n/2;
+    int sum=a;
+    if(a&1){
+        double b=a/2;
+        sum+=b+1;
+        
+    }
+    else{
+        double b=(a-1)/2;
+        sum+=b+1;
+    }
+    cout<<sum<<endl;
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

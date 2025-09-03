@@ -39,7 +39,18 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    string ternary;
+    while(n){
+        ternary+=(n%3+'0');
+        n/=3;
+    }
+    int ans=0;
+    for(int i=0;i<ternary.size();i++){
+        ans+=(ternary[i]-'0')*(pow(3,i+1)+i*pow(3,i-1));
+    }
+    cout<<ans<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);

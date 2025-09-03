@@ -39,7 +39,20 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n; cin>>n;
+    string s; cin>>s;
+    int m; cin>>m;
+    string add; cin>>add;
+    string query; cin>>query;
+    for(int i=0;i<m;i++){
+        if(query[i]=='D'){
+            s+=add[i];
+        }
+        else{
+            s.insert(s.begin(),add[i]);
+        }
+    }
+    cout<<s<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);

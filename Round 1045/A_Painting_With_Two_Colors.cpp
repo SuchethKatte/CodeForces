@@ -39,7 +39,18 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, a, b;
+    cin>>n>>a>>b;
+    if((n-b)&1){
+        no();
+        return;
+    }
+    if(a<=b||(n-a)%2==0){
+        yes();
+        return;
+
+    }
+    no();
 }
 signed main(){
     ios_base::sync_with_stdio(0);

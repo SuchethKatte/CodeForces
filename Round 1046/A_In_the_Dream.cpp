@@ -38,8 +38,17 @@ template <class T, class V> void _print(map <T, V> v) {cout << "[ "; for (auto i
 template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size();k++){_print(v[k]);}}
 /////////////////////////////////////////////////////////////
 
+bool check(int a, int b){
+    if(a>b) return check(b,a);
+    return b<=(2*a+2);
+}
+
 void solve(){
-    
+    int a, b, c, d;
+    cin>>a>>b>>c>>d;
+    c-=a;
+    d-=b;
+    (check(a,b)&&check(c,d))?yes():no();
 }
 signed main(){
     ios_base::sync_with_stdio(0);

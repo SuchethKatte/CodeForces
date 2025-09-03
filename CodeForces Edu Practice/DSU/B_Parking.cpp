@@ -38,15 +38,52 @@ template <class T, class V> void _print(map <T, V> v) {cout << "[ "; for (auto i
 template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size();k++){_print(v[k]);}}
 /////////////////////////////////////////////////////////////
 
+class DSU{
+    vector<int> parent;
+    int n;
+    public:
+    DSU(int n){
+        this->n=n;
+        parent.resize(n+1);
+        for(int i=1;i<=n;i++){
+            parent[i]=i;
+        }
+    }
+    int get_parent(int node){
+        if(node==(n+1)){
+            return get_parent(1);
+        }
+        if(node==parent[node]) return node;
+        return parent[node]=get_parent(parent[node]);
+    }
+    int get(int node){
+        int p=get_parent(node);
+        parent[p]=get_parent(p+1);
+        return p;
+    }
+
+};
+
+
+
 void solve(){
-    
+    int n;
+    cin>>n;
+    DSU dsu(n);
+    while(n--){
+        int a;
+        cin>>a;
+        cout<<dsu.get(a)<<" ";
+    }
+    cout<<endl;
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     int tt;
-    cin>>tt;
-    //tt=1;
+    //cin>>tt;
+    tt=1;
     while(tt--){
         solve();
     }

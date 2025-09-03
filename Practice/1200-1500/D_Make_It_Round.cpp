@@ -39,7 +39,60 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, m;
+    cin>>n>>m;
+    // int fact2=0, fact5=0;
+    // int n0=n;
+    // while(n%2==0){
+    //     fact2++;
+    //     n/=2;
+
+    // }
+    // while(n%5==0){
+    //     fact5++;
+    //     n/=5;
+    // }
+    // int k=1;
+    // while(fact2<fact5&&k*2<=m){
+    //     k*=2;
+    //     fact2++;
+    // }
+    // while(fact5<fact2&&k*5<=m){
+    //     k*=5;
+    //     fact5++;
+    // }
+    // while(k*10<=m){
+    //     k*=10;
+    // }
+    // k=k*(m/k);
+    // cout<<n0*k<<endl;
+    double digit_=log10(m);
+    int digit=digit_;
+    if(digit==digit_) digit--;
+    int k=1;
+    for(int i=1;i<=digit;i++){
+        k*=10;
+    }
+    int ans=0, zeroes=0;
+    for(int i=k;i<=m;i++){
+        int temp=n*i;
+        int zero=0;
+        while(temp%10==0){
+            zero++;
+            temp/=10;
+        }
+        if(zero>zeroes){
+            ans=n*i;
+            zeroes=zero;
+        }
+        else if(zero==zeroes){
+            ans=max(ans,n*i);
+        }
+    }
+    cout<<ans<<endl;
+
+
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

@@ -39,7 +39,35 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, k;
+    cin>>n>>k;
+    string s;
+    cin>>s;
+    int ans=0, temp=0;
+    for(int i=0;i<n;i++){
+        if(s[i]=='0'){
+            temp=0;
+        }
+        else temp++;
+        ans=max(ans,temp);
+    }
+    if(ans>=k){
+        no();
+        return;
+    }
+    yes();
+    int ans1=1, ans2=n;
+    for(int i=0;i<n;i++){
+        if(s[i]=='0'){
+            cout<<ans2<<" ";
+            ans2--;
+        }
+        else{
+            cout<<ans1<<" ";
+            ans1++;
+        }
+    }
+    cout<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);

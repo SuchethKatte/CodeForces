@@ -39,7 +39,66 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
+    int n; cin>>n;
+    vector<int> arr(n);
+    fillarr(arr);
+    // int ans=0;
+    // for(int i=1;i<n-1;i++){
+    //     if((i&1)){
+    //         if(arr[i]<arr[i-1]){
+    //             ans+=(arr[i-1]-arr[i]);
+    //             arr[i-1]=arr[i];
+    //         }
+    //         if(arr[i]<arr[i+1]){
+    //             ans+=(arr[i+1]-arr[i]);
+    //             arr[i+1]=arr[i];
+    //         }
+    //     }
+    // }
+    // if((n-1)%2){
+    //     if(arr[n-1]<arr[n-2]){
+    //             ans+=(arr[n-2]-arr[n-1]);
+    //             arr[n-2]=arr[n-1];
+    //         }
+    // }
+    // int k=3;
     
+    // if(n>=3){
+    //     int a=0, b=1, c=2;
+    //     while(c<n){
+    //         if(a%2==0){
+    //             if(arr[b]<(arr[a]+arr[c])){
+    //                 ans+=(arr[a]+arr[c]-arr[b]);
+    //                 arr[a]-=arr[a]+arr[c]-arr[b];
+    //             }
+    //         }
+    //         a++;b++;c++;
+    //     }
+    // }
+    // cout<<ans<<endl;
+    int ans=0;
+    for(int i=1;i<n-1;i+=2){
+        if(arr[i]<(arr[i-1]+arr[i+1])){
+            ans+=arr[i-1]+arr[i+1]-arr[i];
+            arr[i-1]=arr[i-1]-(arr[i-1]+arr[i+1]-arr[i]);
+            if(arr[i-1]<0){
+                arr[i+1]+=arr[i-1];
+                arr[i-1]=0;
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<" ";
+    }
+    if(n%2==0){
+        if(arr.back()<arr[n-2]){
+            ans+=arr[n-2]-arr.back();
+        }
+    }
+    cout<<ans<<endl;
+    
+
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

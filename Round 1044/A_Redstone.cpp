@@ -39,7 +39,19 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    fillarr(arr);
+    map<int,int> mpp;
+    for(int i=0;i<n;i++){
+        if(mpp[arr[i]]){
+            yes();
+            return;
+        }
+        mpp[arr[i]]++;
+    }
+    no();
 }
 signed main(){
     ios_base::sync_with_stdio(0);

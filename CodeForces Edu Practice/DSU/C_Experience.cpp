@@ -38,15 +38,88 @@ template <class T, class V> void _print(map <T, V> v) {cout << "[ "; for (auto i
 template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size();k++){_print(v[k]);}}
 /////////////////////////////////////////////////////////////
 
+class DSU{
+    vector<int> parent, points, size;
+    public:
+    DSU(int n){
+        parent.resize(n+1);
+        points.resize(n+1,0);
+        size.resize(n+1,1);
+        for(int i=1;i<=n;i++){
+            parent[i]=i;
+        }
+    }
+    int get_parent(int node){
+        if(node==parent[node]){
+            return node;
+        }
+        return parent[node]=get_parent(parent[node]);
+    }
+    void join(int u, int v){
+        int up=get_parent(u);
+        int vp=get_parent(v);
+        if(up==vp){
+            return;
+        }
+        if(size[up]<size[vp]){
+            parent[up]=vp;
+            size[vp]+=size[up];
+        }
+        else{
+            parent[vp]=up;
+            size[up]+=size[vp];
+        }
+    }
+    void add(int node, int point){
+        int parent_node=get_parent(node);
+        for(int i=1;i<=parent.size();i++){
+            if(get_parent(i)==parent_node){
+                points[i]+=point;
+            }
+        }
+    }
+    int get(int node){
+        return points[node];
+    }
+
+
+};
+
+
+
+
+
 void solve(){
-    
+    int n, m;
+    cin>>n>>m;
+    DSU dsu(n);
+    for(int i=0;i<m;i++){
+        string a;
+        cin>>a;
+        if(a=="get"){
+            int b;
+            cin>>b;
+            cout<<dsu.get(b)<<endl;
+        }
+        else if(a=="add"){
+            int b, points;
+            cin>>b>>points;
+            dsu.add(b,points);
+        }
+        else{
+            int u, v;
+            cin>>u>>v;
+            dsu.join(u,v);
+        }
+    }
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     int tt;
-    cin>>tt;
-    //tt=1;
+    //cin>>tt;
+    tt=1;
     while(tt--){
         solve();
     }

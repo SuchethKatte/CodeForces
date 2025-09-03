@@ -39,7 +39,26 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, k;
+    cin>>n>>k;
+    vector<int> arr(n);
+    fillarr(arr);
+    if(k&1){
+        for(int i=0;i<n;i++){
+            if(arr[i]&1){
+                arr[i]+=k;
+            }
+            cout<<arr[i]<<" ";
+        }
+        cout<<endl;
+        return;
+    }
+    for(int i=0;i<n;i++){
+        arr[i]+=(arr[i]%(k+1))*k;
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

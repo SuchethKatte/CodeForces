@@ -38,8 +38,35 @@ template <class T, class V> void _print(map <T, V> v) {cout << "[ "; for (auto i
 template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size();k++){_print(v[k]);}}
 /////////////////////////////////////////////////////////////
 
+void dfs(int node, vector<vector<vector<int>>> &adj, vector<int> &index, vector<int> &dp){
+    for(auto it:adj[node]){
+        if(dp[it[0]]==0){
+            dp[it[0]]=dp[node];
+            if(it[1]<=index[node]){   // This means if the value has appeared before the parent node, then 
+                dp[it[0]]++;         // It has to wait for another iteration so it could join   
+            }
+            index[it[0]]=it[1];      // Since this will be the parent node next, we shld store it's original index
+            dfs(it[0],adj,index,dp);
+        }
+    }
+}
+
+
 void solve(){
-    
+    int n;
+    cin>>n;
+    vector<vector<vector<int>>> adj(n+1);
+    vector<int> index(n+1,0);
+    for(int i=1;i<n;i++){
+        int a, b;
+        cin>>a>>b;
+        adj[a].push_back({b,i});
+        adj[b].push_back({a,i});
+    }
+    vector<int> dp(n+1,0);
+    dp[1]=1;
+    dfs(1,adj,index,dp);
+    cout<<*max_element(all(dp))<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);

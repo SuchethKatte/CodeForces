@@ -9,7 +9,6 @@ using namespace std;
 #define all(a) a.begin(), a.end()
 #define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<int> &a, vector<int> &b){ for(auto &it:a) {cin>>it;} for(auto &it:b) {cin>>it;}}
 void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
@@ -39,7 +38,39 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    vector<vector<int>> adj(n+1);
+    for(int i=0;i<n-1;i++){
+        int a, b;
+        cin>>a>>b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    if(n<=2){
+        cout<<0<<endl;
+        return;
+    }
+    vector<int> leaf(n+1,0);
+    int leaves=0;
+    for(int i=1;i<=n;i++){
+        if(adj[i].size()==1){
+            leaves++;
+            leaf[i]=1;
+        }
+    }
+    int ans=1e9;
+    for(int i=1;i<=n;i++){
+        int adjleaves=0;
+        for(auto node:adj[i]){
+            if(leaf[node]) adjleaves++;
+        }
+        int temp=leaves-adjleaves;
+        if(leaf[i]) temp--;
+        ans=min(ans,temp);
+
+    }
+    cout<<(ans<0?0:ans)<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);

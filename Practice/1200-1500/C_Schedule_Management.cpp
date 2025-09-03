@@ -39,6 +39,10 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
+    int n, m;
+    cin>>n>>m;
+    vector<int> arr(m);
+    fillarr(arr);
     
 }
 signed main(){

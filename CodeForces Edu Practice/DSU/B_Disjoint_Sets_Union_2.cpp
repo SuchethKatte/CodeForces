@@ -38,15 +38,91 @@ template <class T, class V> void _print(map <T, V> v) {cout << "[ "; for (auto i
 template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size();k++){_print(v[k]);}}
 /////////////////////////////////////////////////////////////
 
+class DSU{
+    vector<int> parent, size, minimum, maximum;
+    public:
+    DSU(int n){
+        size.resize(n+1,1);
+        parent.resize(n+1);
+        minimum.resize(n+1);
+        maximum.resize(n+1);
+        for(int i=1;i<=n;i++){
+            parent[i]=i;
+            minimum[i]=i;
+            maximum[i]=i;
+        }
+    }
+    int ult_parent(int node){
+        if(node==parent[node]){
+            return node;
+        }
+        return parent[node]=ult_parent(parent[node]);
+    }
+
+    int Size(int node){
+        return size[ult_parent(node)];
+    }
+
+    int Minimum(int node){
+        return minimum[ult_parent(node)];
+    }
+
+    int Maximum(int node){
+        return maximum[ult_parent(node)];
+    }
+
+    void UnionBySize(int u, int v){ 
+        int pu=ult_parent(u);
+        int pv=ult_parent(v);
+        if(pu==pv){
+            return;
+        }
+        if(Size(pu)<Size(pv)){
+            size[pv]+=size[pu];
+            parent[pu]=pv;
+            minimum[pv]=min(minimum[pv],minimum[pu]);
+            maximum[pv]=max(maximum[pv],maximum[pu]);
+
+        }
+        else{
+            size[pu]+=size[pv];
+            parent[pv]=pu;
+            minimum[pu]=min(minimum[pv],minimum[pu]);
+            maximum[pu]=max(maximum[pv],maximum[pu]);
+        }
+    }
+    void get(int node){
+        cout<<Minimum(node)<<" "<<Maximum(node)<<" "<<Size(node)<<endl;
+    }
+
+};
+
+
 void solve(){
-    
+    int n, m;
+    cin>>n>>m;
+    DSU dsu(n);
+    for(int i=0;i<m;i++){
+        string a; 
+        cin>>a;
+        if(a=="union"){
+            int b, c;
+            cin>>b>>c;
+            dsu.UnionBySize(b, c);
+        }
+        else if(a=="get"){
+            int b;
+            cin>>b;
+            dsu.get(b);
+        }
+    }
 }
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     int tt;
-    cin>>tt;
-    //tt=1;
+    //cin>>tt;
+    tt=1;
     while(tt--){
         solve();
     }

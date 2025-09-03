@@ -39,6 +39,22 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
+    int n, m;
+    cin>>n>>m;
+    string ternary;
+    while(n){
+        ternary+=(n%3+'0');
+        n/=3;
+    }
+    vector<int> number(ternary.size(),0);
+    int ans=1, k=1, maxindex=0;
+    for(int i=0;i<ternary.size();i++){
+        if(ans*m>=n){
+            maxindex=i;
+            break;
+        }
+        ans*=3;
+    }
     
 }
 signed main(){

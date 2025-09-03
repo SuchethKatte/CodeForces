@@ -39,7 +39,25 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    int num=1e18;
+    vector<int> ans;
+    for(int k=18;k>=1;k--){
+        if(n%(num+1)==0){
+            ans.push_back(n/(num+1));
+        }
+        num/=10;
+    }
+    if(ans.size()==0){
+        cout<<0<<endl;
+        return;
+    }
+    cout<<ans.size()<<endl;
+    for(auto it:ans){
+        cout<<it<<" ";
+    }
+    cout<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);

@@ -39,14 +39,27 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int w, h, n;
+    cin>>w>>h>>n;
+    int l=min(w,h), r=max(w,h)*n;
+    while(l<=r){
+        int mid=(l+r)/2;
+        int number=(mid/w)*(mid/h);
+        if(number>=n){
+            r=mid-1;
+        }
+        else{
+            l=mid+1;
+        }
+    }
+    cout<<l<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     int tt;
-    cin>>tt;
-    //tt=1;
+    //cin>>tt;
+    tt=1;
     while(tt--){
         solve();
     }

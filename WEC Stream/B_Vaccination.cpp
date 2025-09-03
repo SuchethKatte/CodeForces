@@ -38,8 +38,19 @@ template <class T, class V> void _print(map <T, V> v) {cout << "[ "; for (auto i
 template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size();k++){_print(v[k]);}}
 /////////////////////////////////////////////////////////////
 
+bool bs(vector<int> &arr, int n, int k, int d, int w, int size){
+    int count=0;
+    for(int i=0;i<n;i++){
+        
+    }
+}
+
+
 void solve(){
-    
+    int n, k,d, w;
+    cin>>n>>k>>d>>w;
+    vector<int> arr(n);
+    fillarr(arr);
 }
 signed main(){
     ios_base::sync_with_stdio(0);

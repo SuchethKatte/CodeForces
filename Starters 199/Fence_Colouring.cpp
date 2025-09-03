@@ -9,7 +9,6 @@ using namespace std;
 #define all(a) a.begin(), a.end()
 #define rall(a) a.rbegin(), a.rend()
 void fillarr(vector<int> &arr){ for(auto &it:arr) cin>>it;}
-void fillarr(vector<int> &a, vector<int> &b){ for(auto &it:a) {cin>>it;} for(auto &it:b) {cin>>it;}}
 void fillarr(vector<vector<int>> &arr){ for(auto &it:arr) fillarr(it);}
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
@@ -39,6 +38,20 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    vector<int> cnt(n+1,0);
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+        cnt[arr[i]]++;
+    }
+    int ones=cnt[1];
+    int maxcnt=0;
+    for(int i=1;i<=n;i++){
+        maxcnt=max(maxcnt,cnt[i]);
+    }
+    cout<<min(n-ones,1+(n-maxcnt))<<endl;
     
 }
 signed main(){

@@ -39,14 +39,38 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n, k;
+    cin>>n>>k;
+    vector<int> arr(n);
+    fillarr(arr);
+    for(int i=0;i<k;i++){
+        int node;
+        cin>>node;
+        int l=0, r=n-1;
+        bool flag=true;
+        while(l<=r){
+            int mid=(l+r)/2;
+            if(arr[mid]==node){
+                yes();
+                flag=0;
+                break;
+            }
+            if(arr[mid]>node){
+                r=mid-1;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        if(flag) no();
+    }
 }
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     int tt;
-    cin>>tt;
-    //tt=1;
+    // cin>>tt;
+    tt=1;
     while(tt--){
         solve();
     }

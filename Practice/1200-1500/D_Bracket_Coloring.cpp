@@ -39,6 +39,54 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
+    int n; cin>>n;
+    string s;
+    cin>>s;
+    vector<int> bal(n,0);
+    if(s[0]=='(') bal[0]=1;
+    else bal[0]=-1;
+    for(int i=1;i<n;i++){
+        if(s[i]=='('){
+            bal[i]=bal[i-1]+1;
+        }
+        else{
+            bal[i]=bal[i-1]-1;
+        }
+    }
+    if(bal.back()){
+        cout<<-1<<endl;
+        return;
+    }
+    if(*min_element(all(bal))==0||*max_element(all(bal))==0){
+        cout<<1<<endl;
+        for(int i=0;i<n;i++){
+            cout<<"1 ";
+        }
+        cout<<endl;
+        return;
+    }
+    cout<<2<<endl;
+    bool flag=true;
+    for(int i=0;i<n;i++){
+        if(bal[i]>0){
+            flag=true;
+            cout<<"1 ";
+        }
+        else if(bal[i]<0){
+            flag=false;
+            cout<<"2 ";
+        }
+        else{
+            if(flag){
+                cout<<"1 ";
+            }
+            else{
+                cout<<"2 ";
+            }
+        }
+    }
+    cout<<endl;
+
     
 }
 signed main(){

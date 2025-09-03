@@ -39,7 +39,42 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    fillarr(arr);
+    sort(all(arr));
+    int i=0, j=n-1;
+    int x=0;
+    int ans=0;
+    while(i<j){
+        if((x+arr[i])<arr[j]){
+            x+=arr[i];
+            ans+=arr[i];
+            i++;
+            
+        }
+        else{
+            int need=arr[j]-x;
+            ans+=need;
+            arr[i]-=need;
+            ans++;
+            j--;
+            x=0;
+        }
+
+    }
+    if(i==j){
+        if(arr[i]<=x){
+            ans++;
+        }
+        else{
+            int need=arr[i]-x;
+            ans+=need;
+            ans++;
+        }
+    }
+    cout<<ans<<endl;
 }
 signed main(){
     ios_base::sync_with_stdio(0);

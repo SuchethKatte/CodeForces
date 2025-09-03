@@ -38,8 +38,72 @@ template <class T, class V> void _print(map <T, V> v) {cout << "[ "; for (auto i
 template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size();k++){_print(v[k]);}}
 /////////////////////////////////////////////////////////////
 
+int bfs(int start, int b, int n, vector<vector<int>> &adj){
+    stack<int> st;
+    vector<int> vis(n+1,0);
+    vis[start]=1;
+    int ans=0;
+    while(!st.empty()){
+        int size=st.size();
+        ans++;
+        while(size--){
+            int node=st.top();
+            st.pop();
+            for(auto it:adj[node]){
+                if(adj[it].size()==1){
+                    return ans;
+                }
+                if(!vis[it]&&it!=b){
+                    vis[it]=1;
+                    st.push(it);
+                }
+            }
+        }
+    }
+    return -1;
+}
+
+
 void solve(){
-    
+    int n;
+    cin>>n;
+    vector<vector<int>> adj(n+1);
+    vector<int> deg(n+1,0);
+    for(int i=0;i<n-1;i++){
+        int a, b;
+        cin>>a>>b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+        deg[a]++; deg[b]++;
+    }
+    int k=0;
+    int b=-1;
+    for(int i=1;i<=n;i++){
+        if(deg[i]>=3){
+            k++;
+            b=i;
+        }
+    }
+    if(k==0){
+        cout<<-1<<endl;
+        return;
+    }
+    int u=-1, v=-1;
+    for(auto it:adj[b]){
+        if(u==-1) u=it;
+        else if(v==-1){
+            v=it;
+            break;
+        }
+    }
+    int uw=bfs(u,b,n,adj);
+    int vw=bfs(v,b,n,adj);
+    if(uw<=vw){
+        cout<<v<<" "<<b<<" "<<u<<endl;
+    }
+    else{
+    cout<<u<<" "<<b<<" "<<v<<endl;}
+
 }
 signed main(){
     ios_base::sync_with_stdio(0);

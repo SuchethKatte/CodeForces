@@ -39,7 +39,26 @@ template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size
 /////////////////////////////////////////////////////////////
 
 void solve(){
-    
+    string s;
+    cin>>s;
+    int B=0, A=0;
+    for(int i=0;i<s.size();i++){
+        if(s[i]=='A') A++;
+        else B++;
+        if(B>A){
+            no();
+            return;
+        }
+    }
+    if(B>A){
+        no();
+        return;
+    }
+    if(s.back()!='B'){
+        no();
+        return;
+    }
+    yes();
 }
 signed main(){
     ios_base::sync_with_stdio(0);

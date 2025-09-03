@@ -38,15 +38,68 @@ template <class T, class V> void _print(map <T, V> v) {cout << "[ "; for (auto i
 template <class T>void _print(vector<vector<vector<T>>> v){for(int k =0;k<v.size();k++){_print(v[k]);}}
 /////////////////////////////////////////////////////////////
 
+class DSU{
+    vector<int> parent, rank;
+    public:
+    DSU(int n){
+        rank.resize(n+1,0);
+        parent.resize(n+1);
+        for(int i=1;i<=n;i++){
+            parent[i]=i;
+        }
+    }
+    int ult_parent(int u){
+        if(parent[u]==u){
+            return u;
+        }
+        return parent[u]=ult_parent(parent[u]);
+    }
+    bool get(int u, int v){
+        return ult_parent(u)==ult_parent(v);
+    }
+    void Union(int u, int v){
+        int ult_parent_u=ult_parent(u);
+        int ult_parent_v=ult_parent(v);
+        if(ult_parent_u==ult_parent_v) return;
+        if(rank[ult_parent_u]<rank[ult_parent_v]){
+            parent[ult_parent_u]=ult_parent_v;
+        }
+        else if(rank[ult_parent_u]>rank[ult_parent_v]){
+            parent[ult_parent_v]=ult_parent_u;
+        }
+        else{
+            parent[ult_parent_u]=ult_parent_v;
+            rank[ult_parent_v]++;
+        }
+    }
+
+};
+
+
+
+
 void solve(){
-    
+    int n, m;
+    cin>>n>>m;
+    DSU dsu(n);
+    for(int i=0;i<m;i++){
+        string a; int b, c;
+        cin>>a>>b>>c;
+        if(a=="union"){
+            dsu.Union(b,c);
+        }
+        if(a=="get"){
+            dsu.get(b,c)?yes():no();
+        }
+
+    }
 }
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     int tt;
-    cin>>tt;
-    //tt=1;
+    // cin>>tt;
+    tt=1;
     while(tt--){
         solve();
     }
